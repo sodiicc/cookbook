@@ -41,7 +41,7 @@ router.route("/update/:id").post((req, res) => {
     .then(recipe => {
       recipe.username = req.body.username;
       recipe.description = req.body.description;
-      recipe.duration = Number(req.body.duration);
+      recipe.duration = req.body.duration;
       recipe.date = Date.parse(req.body.date);
       recipe
         .save()

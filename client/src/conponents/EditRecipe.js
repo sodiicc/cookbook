@@ -5,7 +5,7 @@ export const EditRecipe = (props) => {
   const [recipe, setRecipe] = useState({
     username: "",
     description: "",
-    duration: 0,
+    duration: "",
     date: new Date()
   });
   const [users, setUsers] = useState([]);
@@ -63,12 +63,6 @@ export const EditRecipe = (props) => {
       duration: e.target.value
     });
   };
-  const onChangeDate = date => {
-    setRecipe({
-      ...recipe,
-      date
-    });
-  };
   const onSubmit = e => {
     e.preventDefault();
 
@@ -119,9 +113,6 @@ export const EditRecipe = (props) => {
             value={recipe.duration}
             onChange={onChangeDuration}
           />
-        </div>
-        <div className="form-group">
-          <label>Date: </label>
         </div>
         <div className="form-group">
           <input

@@ -5,7 +5,7 @@ export const CreateRecipe = () => {
   const [recipe, setRecipe] = useState({
     username: "",
     description: "",
-    duration: '',
+    duration: "",
     date: new Date()
   });
   const [users, setUsers] = useState([]);
@@ -47,12 +47,6 @@ export const CreateRecipe = () => {
     setRecipe({
       ...recipe,
       duration: e.target.value
-    });
-  };
-  const onChangeDate = date => {
-    setRecipe({
-      ...recipe,
-      date
     });
   };
   const onSubmit = e => {
