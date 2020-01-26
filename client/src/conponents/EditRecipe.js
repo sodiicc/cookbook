@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import DatePicker from "react-datepicker";
 import axios from "axios";
-import "react-datepicker/dist/react-datepicker.css";
 
 export const EditRecipe = (props) => {
   const [recipe, setRecipe] = useState({
@@ -124,9 +122,6 @@ export const EditRecipe = (props) => {
         </div>
         <div className="form-group">
           <label>Date: </label>
-          <div>
-            <DatePicker selected={recipe.date} onChange={onChangeDate} />
-          </div>
         </div>
         <div className="form-group">
           <input
