@@ -19,10 +19,10 @@ connection.once('open', () => {
   console.log('MongoB+DB connection is successfully !!!')
 })
 
-const exercisesRouter = require('./routs/exerxisesRouter');
+const recipesRouter = require('./routs/recipesRouter');
 const usersRouter = require('./routs/usersRouter');
 
-app.use('/exercises', exercisesRouter);
+app.use('/recipes', recipesRouter);
 app.use('/users', usersRouter);
 
 app.get("*", (req, res) => {

@@ -3,30 +3,18 @@ import DatePicker from "react-datepicker";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 
-export const EditExercise = (props) => {
-  const [exercise, setExercise] = useState({
+export const CreateRecipe = () => {
+  const [recipe, setRecipe] = useState({
     username: "",
     description: "",
-    duration: 0,
+    duration: '',
     date: new Date()
   });
   const [users, setUsers] = useState([]);
-
+  
+  
   useEffect(() => {
-    axios
-      .get("/exercises/" + props.match.params.id)
-      .then(res => {
-        const data = res.data
-        setExercise({
-          username: data.username,
-          description: data.description,
-          duration: data.duration,
-          date: new Date(data.date)
-        });
-      })
-      .catch(err => console.log(err))
-
-      axios.get("/users").then(res => {
+    axios.get("/users").then(res => {
       if (res.data.length > 0) {
         setUsers(
           res.data.map(user => {
@@ -35,47 +23,46 @@ export const EditExercise = (props) => {
         );        
       }
     });
-
-  }, [props.match.params.id]);
+  }, [] );
 
   useEffect(() => {
-    setExercise({
-      ...exercise,
+    setRecipe({
+      ...recipe,
       username: users[0]
     })
     // eslint-disable-next-line 
   }, [users])
 
   const onChangeUsername = e => {
-    setExercise({
-      ...exercise,
+    setRecipe({
+      ...recipe,
       username: e.target.value
     });
-    console.log('exercise', exercise)
   };
   const onChangeDescription = e => {
-    setExercise({
-      ...exercise,
+    setRecipe({
+      ...recipe,
       description: e.target.value
     });
   };
   const onChangeDuration = e => {
-    setExercise({
-      ...exercise,
+    setRecipe({
+      ...recipe,
       duration: e.target.value
     });
   };
   const onChangeDate = date => {
-    setExercise({
-      ...exercise,
+    setRecipe({
+      ...recipe,
       date
     });
   };
   const onSubmit = e => {
     e.preventDefault();
+    console.log("recipe", recipe);
 
     axios
-      .post("/exercises/update/"+ props.match.params.id, exercise)
+      .post("/recipes/add", recipe)
       .then(res => console.log(res.data));
 
     window.location = "/";
@@ -83,14 +70,14 @@ export const EditExercise = (props) => {
 
   return (
     <div>
-      <h3>Edit Exercise Log</h3>
+      <h3>Create New Recipe Log</h3>
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label>Username: </label>
           <select
             required
             className="form-control"
-            value={exercise.username}
+            value={recipe.username}
             onChange={onChangeUsername}
           >
             {users.map(user => {
@@ -103,35 +90,35 @@ export const EditExercise = (props) => {
           </select>
         </div>
         <div className="form-group">
-          <label>Description: </label>
+          <label>Dish Name: </label>
           <input
             typr="text"
             required
             className="form-control"
-            value={exercise.description}
+            placeholder='write the name of your dish'
+            value={recipe.description}
             onChange={onChangeDescription}
+            onFocus={(e) => e.target.placeholder=''}
+            onBlur={(e) => e.target.placeholder='write the name of your dish'}
           />
         </div>
         <div className="form-group">
-          <label>Duration: </label>
+          <label>Cooking Duration: </label>
           <input
             typr="text"
             required
+            placeholder='for example 20min'
             className="form-control"
-            value={exercise.duration}
+            value={recipe.duration}
             onChange={onChangeDuration}
+            onFocus={(e) => e.target.placeholder=''}
+            onBlur={(e) => e.target.placeholder='for example 20min'}
           />
-        </div>
-        <div className="form-group">
-          <label>Date: </label>
-          <div>
-            <DatePicker selected={exercise.date} onChange={onChangeDate} />
-          </div>
         </div>
         <div className="form-group">
           <input
             type="submit"
-            value="Edit Exercise Log"
+            value="Create Recipe Log"
             className="btn btn-primary"
           />
         </div>
