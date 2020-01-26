@@ -4,12 +4,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Inside progect: 
 ```
+$ npm install
 $ npm run start
 ```
 ```
-$ cd backend<br>
+$ cd client
 ```
 ```
+$ npm install
 $ npm run start
 ```
 
